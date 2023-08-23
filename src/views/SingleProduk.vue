@@ -119,16 +119,32 @@
                                 <!-- <h1 class="text-3xl font-bold">${{ product.price }}</h1> -->
                                 <!-- <span class="text-base">/month</span> -->
                             </div>
-  
-                            <button type="button"
+                            
+                            <div v-if="token">
+                                <a href="/cart">
+                                <button type="button" 
                                 class="inline-flex items-center justify-center rounded-md border-2 border-transparent bg-gray-900 bg-none px-12 py-3 text-center text-base font-bold text-white transition-all duration-200 ease-in-out focus:shadow hover:bg-gray-800">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="shrink-0 mr-3 h-5 w-5" fill="none"
                                     viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                     <path stroke-linecap="round" stroke-linejoin="round"
                                         d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
                                 </svg>
-                                <a href="/cart">Add to cart</a>
+                                Add to cart
                             </button>
+                        </a>
+                            </div>
+                                <div v-else>
+                                <router-link to="/login">
+                                    <button type="button" 
+                                class="inline-flex items-center justify-center rounded-md border-2 border-transparent bg-gray-900 bg-none px-12 py-3 text-center text-base font-bold text-white transition-all duration-200 ease-in-out focus:shadow hover:bg-gray-800">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="shrink-0 mr-3 h-5 w-5" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                                </svg>
+                                Add to cart
+                            </button>
+                                </router-link></div>
                         </div>
   
                         <ul class="mt-8 space-y-2">
@@ -190,6 +206,11 @@
   import { mapGetters, mapActions} from "vuex";
   
   export default {
+    data() {
+        return{
+            token: null
+        }
+    },
     computed: {
         ...mapGetters("product", ["getProdukById"]),
         product() {
@@ -207,6 +228,8 @@
     mounted(){
       const produkId = this.$route.params.id;
       this.fetchSingleProduk(produkId)
+      const cekToken = localStorage.getItem("token");
+      this.token = cekToken
     }
     
   
