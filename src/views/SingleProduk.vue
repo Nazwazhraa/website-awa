@@ -100,7 +100,7 @@
                                         class=""></path>
                                 </svg>
                             </div>
-                            <!-- <p class="ml-2 text-sm font-medium text-gray-500">{{ product.rating.rate }}</p> -->
+                            <p class="ml-2 text-sm font-medium text-gray-500">{{ product.rating.rate }}</p>
                         </div>
   
                         <h2 class="mt-8 text-base text-gray-900">Category</h2>
@@ -116,7 +116,7 @@
                         <div
                             class="mt-10 flex flex-col items-center justify-between space-y-4 border-t border-b py-4 sm:flex-row sm:space-y-0">
                             <div class="flex items-end">
-                                <!-- <h1 class="text-3xl font-bold">${{ product.price }}</h1> -->
+                                <h1 class="text-3xl font-bold">${{ product.price }}</h1> 
                                 <!-- <span class="text-base">/month</span> -->
                             </div>
                             
@@ -196,6 +196,7 @@
                 </div>
             </div>
             <div v-else>
+                
                 Product not found.
             </div>
         </div>
@@ -219,11 +220,13 @@
     },
     methods: {
         ...mapActions("product", ["fetchSingleProduk"]),
-        ...mapActions("product",["fetchProduk"])
-        
+        ...mapActions("product",["fetchProduk"]),
+        ...mapActions("keranjang",["fetchKeranjang"])
     },
+
     beforeMount(){
       this.fetchProduk()
+      this.fetchKeranjang()
     },
     mounted(){
       const produkId = this.$route.params.id;
